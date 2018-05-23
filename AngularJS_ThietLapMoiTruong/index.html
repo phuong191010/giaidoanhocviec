@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+<head>
+
+</head>
+
+<body ng-app="myapp" ng-controller="BulbController">
+    <div>
+        <h2 id="demo">Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
+    </div>
+
+    <div>
+        <img ng-click="getBulbStatus()" ng-src="{{src}}">
+        <span class="ng-binding">Turn off the light</span>
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script>
+        angular.module("myapp", [])
+
+        .controller("BulbController", function($scope) {
+
+            var url = "https://www.w3schools.com/js/";
+            var src_arr = [{
+                url: url,
+                filename: "pic_bulbon",
+                type: ".gif",
+                title: "Turn on the light",
+                status: 1
+            }, {
+                url: url,
+                filename: "pic_bulboff",
+                type: ".gif",
+                title: "Turn off the light",
+                status: 0
+            }];
+            $scope.src = url + src_arr[1].filename + src_arr[1].type;
+            $scope.title = src_arr[1].title;
+            $scope.counting = 0;
+            $scope.getBulbStatus = function() {
+
+                $scope.counting++;
+                if ($scope.counting % 2 === 0) {
+                    $scope.src = url + src_arr[1].filename + src_arr[1].type;
+                    $scope.title = src_arr[1].title
+                } else {
+                    $scope.src = url + src_arr[0].filename + src_arr[0].type;
+                    $scope.title = src_arr[0].title
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
